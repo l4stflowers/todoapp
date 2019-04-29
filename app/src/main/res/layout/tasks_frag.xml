@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.l4stflowers.todoapp.tasks.TasksViewModel" />
+            type="io.github.l4stflowers.todoapp.ui.tasks.TasksViewModel" />
 
     </data>
 
