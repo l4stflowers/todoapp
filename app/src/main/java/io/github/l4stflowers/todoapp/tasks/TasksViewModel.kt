@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.github.l4stflowers.todoapp.data.Task
+import io.github.l4stflowers.todoapp.repository.TaskRepository
+import javax.inject.Inject
 
-class TasksViewModel : ViewModel() {
+class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel() {
 
     private val _items = MutableLiveData<List<Task>>().apply { value = emptyList() }
     val items: LiveData<List<Task>>
