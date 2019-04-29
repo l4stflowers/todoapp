@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import io.github.l4stflowers.todoapp.tasks.TasksViewModel
+import io.github.l4stflowers.todoapp.ui.tasks.TasksViewModel
 import io.github.l4stflowers.todoapp.viewmodel.TodoViewModelFactory
 
 @Module

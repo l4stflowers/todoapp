@@ -1,4 +1,4 @@
-package io.github.l4stflowers.todoapp.addedittask
+package io.github.l4stflowers.todoapp.ui.addedittask
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

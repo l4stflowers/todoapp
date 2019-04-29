@@ -1,11 +1,11 @@
-package io.github.l4stflowers.todoapp.tasks
+package io.github.l4stflowers.todoapp.ui.tasks
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.l4stflowers.todoapp.R
-import io.github.l4stflowers.todoapp.addedittask.AddEditTaskActivity
+import io.github.l4stflowers.todoapp.ui.addedittask.AddEditTaskActivity
 
 class TasksActivity : AppCompatActivity() {
 

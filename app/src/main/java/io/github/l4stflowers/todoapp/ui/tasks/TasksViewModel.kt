@@ -1,4 +1,4 @@
-package io.github.l4stflowers.todoapp.tasks
+package io.github.l4stflowers.todoapp.ui.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
