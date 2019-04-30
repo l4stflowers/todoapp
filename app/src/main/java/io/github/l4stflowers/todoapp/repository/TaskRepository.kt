@@ -7,5 +7,4 @@ import javax.inject.Singleton
 @Singleton
 class TaskRepository @Inject constructor(
     private val taskService: TaskService
-){
-}
+)

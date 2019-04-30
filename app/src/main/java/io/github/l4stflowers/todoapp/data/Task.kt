@@ -9,5 +9,4 @@ data class Task @JvmOverloads constructor(
     var repeatType: TaskRepeatType = TaskRepeatType.NONE,
     var reminds: List<Date> = emptyList(),
     var status: TaskStatus = TaskStatus.CREATED
-) {
-}
+)

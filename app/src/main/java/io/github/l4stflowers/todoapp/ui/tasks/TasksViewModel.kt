@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import io.github.l4stflowers.todoapp.R
 import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.repository.TaskRepository
 import javax.inject.Inject
@@ -31,5 +32,9 @@ class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel(
     }
 
     fun loadTasks() {
+        _items.value = emptyList()
+        _dataLoading.value = false
+        _currentFilteringLabel.value = R.string.label_all
+        _noTasksLabel.value = R.string.no_tasks_all
     }
 }
