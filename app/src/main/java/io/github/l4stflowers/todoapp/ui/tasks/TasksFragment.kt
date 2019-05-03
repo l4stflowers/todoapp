@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
 import io.github.l4stflowers.todoapp.R
@@ -30,13 +32,25 @@ class TasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         tasksViewModel = ViewModelProviders.of(this, viewModelFactory).get(TasksViewModel::class.java)
+        viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.viewmodel = tasksViewModel
+        setUpTaskList()
         setUpFab()
     }
 
     override fun onResume() {
         super.onResume()
         tasksViewModel.loadTasks()
+    }
+
+    private fun setUpTaskList() {
+        val adapter = TasksAdapter()
+        val layoutManager = LinearLayoutManager(context)
+        val dividerItemDecoration = DividerItemDecoration(context, layoutManager.orientation)
+        viewDataBinding.tasksList.adapter = adapter
+        viewDataBinding.tasksList.layoutManager = layoutManager
+        viewDataBinding.tasksList.addItemDecoration(dividerItemDecoration)
+        viewDataBinding.tasksList.setHasFixedSize(true)
     }
 
     private fun setUpFab() {

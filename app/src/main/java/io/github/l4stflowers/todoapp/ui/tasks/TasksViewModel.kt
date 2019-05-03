@@ -15,15 +15,15 @@ class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel(
     val items: LiveData<List<Task>>
         get() = _items
 
-    private val _dataLoading = MutableLiveData<Boolean>()
+    private val _dataLoading = MutableLiveData<Boolean>().apply { value = false }
     val dataLoading: LiveData<Boolean>
         get() = _dataLoading
 
-    private val _noTasksLabel = MutableLiveData<Int>()
+    private val _noTasksLabel = MutableLiveData<Int>().apply { value = R.string.no_tasks_all }
     val noTasksLabel: LiveData<Int>
         get() = _noTasksLabel
 
-    private val _currentFilteringLabel = MutableLiveData<Int>()
+    private val _currentFilteringLabel = MutableLiveData<Int>().apply { value = R.string.label_all }
     val currentFilteringLabel: LiveData<Int>
         get() = _currentFilteringLabel
 
@@ -32,7 +32,12 @@ class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel(
     }
 
     fun loadTasks() {
-        _items.value = emptyList()
+        // TODO APIからデータを取得
+        val items = ArrayList<Task>()
+        items.add(Task("1", "タスク一覧表示を実装する", "リストアイテムのレイアウト作成とREST APIからのデータ取得"))
+        items.add(Task("2", "新規タスク登録を実装する", "登録中メッセージはsnackbarで実装。登録完了後の画面遷移はNavigatorを実装する?"))
+
+        _items.value = items
         _dataLoading.value = false
         _currentFilteringLabel.value = R.string.label_all
         _noTasksLabel.value = R.string.no_tasks_all
