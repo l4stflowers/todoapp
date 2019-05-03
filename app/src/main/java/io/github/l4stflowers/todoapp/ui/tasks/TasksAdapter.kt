@@ -10,7 +10,9 @@ import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.databinding.TaskItemBinding
 import io.github.l4stflowers.todoapp.ui.common.DataBoundViewHolder
 
-class TasksAdapter : RecyclerView.Adapter<DataBoundViewHolder<TaskItemBinding>>() {
+class TasksAdapter(
+    private val itemClickCallback: ((Task) -> Unit)?
+): RecyclerView.Adapter<DataBoundViewHolder<TaskItemBinding>>() {
 
     var items: List<Task> = listOf()
 
@@ -20,12 +22,22 @@ class TasksAdapter : RecyclerView.Adapter<DataBoundViewHolder<TaskItemBinding>>(
     }
 
     private fun createBinding(parent: ViewGroup) : TaskItemBinding {
-        return DataBindingUtil.inflate(
+        val binding = DataBindingUtil.inflate<TaskItemBinding>(
             LayoutInflater.from(parent.context),
             R.layout.task_item,
             parent,
             false
         )
+        setItemClickListener(binding)
+        return binding
+    }
+
+    private fun setItemClickListener(binding: TaskItemBinding) {
+        binding.root.setOnClickListener {
+            binding.task?.let {
+                itemClickCallback?.invoke(it)
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<TaskItemBinding>, position: Int) {
