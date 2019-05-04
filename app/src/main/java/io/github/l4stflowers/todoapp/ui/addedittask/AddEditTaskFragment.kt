@@ -28,5 +28,7 @@ class AddEditTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addEditTaskViewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEditTaskViewModel::class.java)
+        viewDataBinding.lifecycleOwner = viewLifecycleOwner
+        viewDataBinding.viewmodel = addEditTaskViewModel
     }
 }
