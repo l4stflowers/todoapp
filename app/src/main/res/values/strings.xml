@@ -3,4 +3,7 @@
 
     <string name="label_all">All</string>
     <string name="no_tasks_all">You have no TO-DOs!</string>
+    <string name="input_title_hint">Title</string>
+    <string name="input_memo_hint">Memo</string>
+    <string name="button_save_caption">Save</string>
 </resources>

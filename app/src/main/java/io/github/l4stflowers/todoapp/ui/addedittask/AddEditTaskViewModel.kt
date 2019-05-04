@@ -1,19 +1,20 @@
 package io.github.l4stflowers.todoapp.ui.addedittask
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.repository.TaskRepository
 import javax.inject.Inject
 
 class AddEditTaskViewModel @Inject constructor(repository: TaskRepository): ViewModel() {
 
-    private val _item = MutableLiveData<Task>()
-    val item: LiveData<Task>
-        get() = _item
+    val title = MutableLiveData<String>()
+    val memo = MutableLiveData<String>()
 
-    fun loadTask() {
-        _item.value = Task()
+    val canSave = MediatorLiveData<Boolean>().also { result ->
+        result.addSource(title) { result.value = !(title.value?.isNullOrBlank() ?: false)}
+    }
+
+    fun saveTask() {
     }
 }
