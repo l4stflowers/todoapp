@@ -30,5 +30,12 @@ class AddEditTaskFragment : Fragment() {
         addEditTaskViewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEditTaskViewModel::class.java)
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.viewmodel = addEditTaskViewModel
+
+        setupInputTitle()
+    }
+
+    private fun setupInputTitle() {
+        viewDataBinding.inputTitleLayout.isHelperTextEnabled = true
+        viewDataBinding.inputTitleLayout.helperText = "*Required"
     }
 }
