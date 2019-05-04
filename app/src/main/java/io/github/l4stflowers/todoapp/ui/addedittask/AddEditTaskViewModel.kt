@@ -12,7 +12,7 @@ class AddEditTaskViewModel @Inject constructor(repository: TaskRepository): View
     val memo = MutableLiveData<String>()
 
     val canSave = MediatorLiveData<Boolean>().also { result ->
-        result.addSource(title) { result.value = !(title.value?.isNullOrBlank() ?: false)}
+        result.addSource(title) { result.value = !title.value.isNullOrBlank()}
     }
 
     fun saveTask() {
