@@ -7,9 +7,16 @@ import androidx.lifecycle.ViewModel
 import io.github.l4stflowers.todoapp.R
 import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.repository.TaskRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel() {
+class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewModel() {
+
+    private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     private val _items = MutableLiveData<List<Task>>().apply { value = emptyList() }
     val items: LiveData<List<Task>>
@@ -32,14 +39,22 @@ class TasksViewModel @Inject constructor(repository: TaskRepository): ViewModel(
     }
 
     fun loadTasks() {
-        // TODO APIからデータを取得
-        val items = ArrayList<Task>()
-        items.add(Task("1", "タスク一覧表示を実装する", "リストアイテムのレイアウト作成とREST APIからのデータ取得"))
-        items.add(Task("2", "新規タスク登録を実装する", "登録中メッセージはsnackbarで実装。登録完了後の画面遷移はNavigatorを実装する?"))
+        loadTasks(false)
+    }
 
-        _items.value = items
-        _dataLoading.value = false
-        _currentFilteringLabel.value = R.string.label_all
-        _noTasksLabel.value = R.string.no_tasks_all
+    fun loadTasks(showLoadingIndicator: Boolean) {
+        uiScope.launch {
+            try {
+                _dataLoading.value = showLoadingIndicator
+                val deferred = repository.loadTasksAsync("baba")
+                val resoponse = deferred.await()
+                if (resoponse.isSuccessful) {
+                    _items.value = resoponse.body()
+                }
+                _dataLoading.value = false
+            } catch (e: Throwable) {
+
+            }
+        }
     }
 }

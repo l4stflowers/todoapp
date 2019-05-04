@@ -15,68 +15,63 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewmodel.loadTasks(true)}"
+        app:refreshing="@{viewmodel.dataLoading}">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
+        <RelativeLayout
+            android:id="@+id/tasksContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:onRefreshListener="@{() -> viewmodel.loadTasks()}"
-            app:refreshing="@{viewmodel.dataLoading}">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/tasksContainer"
+            <LinearLayout
+                android:id="@+id/tasksLL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
 
-                <LinearLayout
-                    android:id="@+id/tasksLL"
+                <TextView
+                    android:id="@+id/filteringLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@{context.getString(viewmodel.currentFilteringLabel)}" />
 
-                    <TextView
-                        android:id="@+id/filteringLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:gravity="center_vertical"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        android:text="@{context.getString(viewmodel.currentFilteringLabel)}" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tasks_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:tasks="@{viewmodel.items}" />
+            </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/tasks_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        bind:tasks="@{viewmodel.items}" />
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/noTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}">
 
-                <LinearLayout
-                    android:id="@+id/noTasks"
+                <TextView
+                    android:id="@+id/noTasksMain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical"
-                    android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}">
+                    android:layout_gravity="center"
+                    android:text="@{context.getString(viewmodel.noTasksLabel)}" />
 
-                    <TextView
-                        android:id="@+id/noTasksMain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@{context.getString(viewmodel.noTasksLabel)}" />
+            </LinearLayout>
+        </RelativeLayout>
 
-                </LinearLayout>
-            </RelativeLayout>
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
