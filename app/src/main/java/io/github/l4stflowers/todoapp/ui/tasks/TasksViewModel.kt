@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewModel() {
 
-    // FIXME ViewModel破棄時にJobをキャンセルするようにする
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
@@ -51,6 +50,7 @@ class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewMo
                 // FIXME ViewModelがRepositoryの実装に依存しているのでRepositoryはLiveData<Task>を返すようにする
                 val deferred = repository.loadTasksAsync("baba")
                 val resoponse = deferred.await()
+                // TODO Snackbarでエラーメッセージを表示する
                 if (resoponse.isSuccessful) {
                     _items.value = resoponse.body()
                 }
@@ -59,5 +59,10 @@ class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewMo
 
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
     }
 }
