@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import io.github.l4stflowers.todoapp.Event
 import io.github.l4stflowers.todoapp.R
 import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.repository.TaskRepository
@@ -37,6 +38,8 @@ class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewMo
     val empty: LiveData<Boolean> = Transformations.map(_items) {
         it.isEmpty()
     }
+
+    val addTaskCompleted = MutableLiveData<Event<Unit>>()
 
     fun loadTasks() {
         loadTasks(false)
