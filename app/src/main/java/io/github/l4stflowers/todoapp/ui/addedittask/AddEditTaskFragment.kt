@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
@@ -34,11 +35,19 @@ class AddEditTaskFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addEditTaskViewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEditTaskViewModel::class.java)
+
+        addEditTaskViewModel.errorText.observe(this, Observer { error ->
+            viewDataBinding.inputTitleLayout.error = error
+        })
+
+        addEditTaskViewModel.dismiss.observe(this, Observer {
+            dismiss()
+        })
+
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.viewmodel = addEditTaskViewModel
 
         setupToolbar()
-        setupInputTitle()
     }
 
     private fun setupToolbar() {
@@ -52,11 +61,6 @@ class AddEditTaskFragment : DialogFragment() {
                 true
             }
         }
-    }
-
-    private fun setupInputTitle() {
-        viewDataBinding.inputTitleLayout.isHelperTextEnabled = true
-        viewDataBinding.inputTitleLayout.helperText = "*Required"
     }
 
     override fun onStart() {

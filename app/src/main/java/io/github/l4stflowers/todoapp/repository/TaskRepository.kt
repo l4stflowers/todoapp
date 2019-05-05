@@ -17,4 +17,8 @@ class TaskRepository @Inject constructor(
     fun loadTasksAsync(user: String): Deferred<Response<List<Task>>> {
         return taskService.getTodos(apiKey, user)
     }
+
+    fun addTaskAsync(user: String, task:Task): Deferred<Response<Task>> {
+        return taskService.createTodo(apiKey, task, user)
+    }
 }

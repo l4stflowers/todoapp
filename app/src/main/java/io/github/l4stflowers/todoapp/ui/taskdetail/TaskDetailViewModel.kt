@@ -13,7 +13,4 @@ class TaskDetailViewModel @Inject constructor(repository: TaskRepository): ViewM
     val item: LiveData<Task>
         get() = _item
 
-    fun loadTask() {
-        _item.value = Task()
-    }
 }
