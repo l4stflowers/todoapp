@@ -14,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
 import io.github.l4stflowers.todoapp.R
 import io.github.l4stflowers.todoapp.databinding.TasksFragBinding
+import io.github.l4stflowers.todoapp.ui.addedittask.AddEditTaskFragment
 import javax.inject.Inject
 
 class TasksFragment : Fragment() {
@@ -59,7 +60,8 @@ class TasksFragment : Fragment() {
         activity?.findViewById<FloatingActionButton>(R.id.fab_add_task)?.let {
             it.setImageResource(R.drawable.ic_add)
             it.setOnClickListener {
-                findNavController(this).navigate(R.id.action_tasksFragment_to_addEditTaskFragment)
+                val addEditTaskFragment = AddEditTaskFragment()
+                addEditTaskFragment.show(fragmentManager!!, AddEditTaskFragment.TAG)
             }
         }
     }

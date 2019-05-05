@@ -10,70 +10,81 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_title_layout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle2">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_title"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_title_hint"
-                android:inputType="text"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:text="@={viewmodel.title}" />
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/BaseToolbar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_memo_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/input_title_layout"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="8dp"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle2">
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_memo"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_memo_hint"
-                android:inputType="textMultiLine"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:text="@={viewmodel.memo}" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:errorEnabled="true"
+                app:hintEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle2">
 
-        </com.google.android.material.textfield.TextInputLayout>
-        
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/input_memo_layout"
-            app:layout_constraintRight_toRightOf="parent"
-            style="@style/Widget.MaterialComponents.Button"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            android:text="@string/button_save_caption"
-            android:enabled="@{viewmodel.canSave}"
-            android:onClickListener="@{() -> viewmodel.saveTask()}" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_title_hint"
+                    android:inputType="text"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:text="@={viewmodel.title}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_memo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/input_title_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="8dp"
+                app:errorEnabled="true"
+                app:hintEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_memo_hint"
+                    android:inputType="textMultiLine"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:text="@={viewmodel.memo}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
