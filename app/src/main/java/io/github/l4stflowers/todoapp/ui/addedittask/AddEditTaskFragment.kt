@@ -9,8 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
+import io.github.l4stflowers.todoapp.Event
 import io.github.l4stflowers.todoapp.R
 import io.github.l4stflowers.todoapp.databinding.AddEditTaskFragBinding
+import io.github.l4stflowers.todoapp.ui.tasks.TasksViewModel
 import javax.inject.Inject
 
 class AddEditTaskFragment : DialogFragment() {
@@ -41,6 +43,8 @@ class AddEditTaskFragment : DialogFragment() {
         })
 
         addEditTaskViewModel.dismiss.observe(this, Observer {
+            val tasksViewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TasksViewModel::class.java)
+            tasksViewModel.addTaskCompleted.value = Event(Unit)
             dismiss()
         })
 
