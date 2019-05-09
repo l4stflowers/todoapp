@@ -51,7 +51,8 @@ class TasksFragment : Fragment() {
 
     private fun setUpTaskList() {
         val adapter = TasksAdapter {
-            findNavController(this).navigate(R.id.action_tasksFragment_to_taskDetailFragment)
+            val action = TasksFragmentDirections.actionTasksFragmentToTaskDetailFragment(it.id!!)
+            findNavController(this).navigate(action)
         }
         val layoutManager = LinearLayoutManager(context)
         val dividerItemDecoration = DividerItemDecoration(context, layoutManager.orientation)

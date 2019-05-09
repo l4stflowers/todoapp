@@ -22,5 +22,9 @@
         android:id="@+id/taskDetailFragment"
         android:name="io.github.l4stflowers.todoapp.ui.taskdetail.TaskDetailFragment"
         android:label="Task details"
-        tools:layout="@layout/task_detail_frag"/>
+        tools:layout="@layout/task_detail_frag">
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+    </fragment>
 </navigation>
