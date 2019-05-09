@@ -23,4 +23,11 @@ interface TaskService {
         @Body task: Task,
         @Path("userId") userId: String
     ): Deferred<Response<Task>>
+
+    @GET("users/{userId}/todos/{id}")
+    fun getTodo(
+        @Header("x-api-key") apiKey: String,
+        @Path("userId") userId: String,
+        @Path("id") id: String
+    ) : Deferred<Response<Task>>
 }
