@@ -45,4 +45,11 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
             }
         }
     }
+
+    fun completeTask() {
+    }
+
+    fun deleteTask() {
+
+    }
 }
