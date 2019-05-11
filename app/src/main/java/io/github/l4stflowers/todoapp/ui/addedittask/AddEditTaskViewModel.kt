@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.l4stflowers.todoapp.Event
 import io.github.l4stflowers.todoapp.data.Task
+import io.github.l4stflowers.todoapp.data.TaskStatus
 import io.github.l4stflowers.todoapp.repository.TaskRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +47,7 @@ class AddEditTaskViewModel @Inject constructor(val repository: TaskRepository): 
                 // FIXME ViewModelがRepositoryの実装に依存しているのでRepositoryはLiveData<Task>を返すようにする
                 val deferred = repository.addTaskAsync(
                     "baba",
-                    Task("", title.value!!, memo.value, "created")
+                    Task("", title.value!!, memo.value, TaskStatus.CREATED.toTaskServiceStatus())
                 )
                 val resoponse = deferred.await()
                 if (resoponse.isSuccessful) {
