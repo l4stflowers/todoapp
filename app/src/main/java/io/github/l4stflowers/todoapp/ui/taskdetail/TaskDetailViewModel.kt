@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import io.github.l4stflowers.todoapp.Event
 import io.github.l4stflowers.todoapp.data.Task
 import io.github.l4stflowers.todoapp.data.TaskStatus
 import io.github.l4stflowers.todoapp.repository.TaskRepository
@@ -29,6 +30,10 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
     val memo: LiveData<String> = Transformations.map(_item) {
         it.memo
     }
+
+    private val _onChangedTaskStatus = MutableLiveData<Event<Unit>>()
+    val onChangedTaskStatus : LiveData<Event<Unit>>
+        get() = _onChangedTaskStatus
 
     fun loadTask(taskId: String) {
         uiScope.launch {
@@ -61,7 +66,7 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
                 val resoponse = deferred.await()
                 // TODO 処理中メッセージを非表示にする
                 if (resoponse.isSuccessful) {
-                    // TODO 画面を閉じる
+                    _onChangedTaskStatus.value = Event(Unit)
                 } else {
                     // TODO Snackbarでエラーメッセージを表示する
                 }
@@ -86,7 +91,7 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
                 val resoponse = deferred.await()
                 // TODO 処理中メッセージを非表示にする
                 if (resoponse.isSuccessful) {
-                    // TODO 画面を閉じる
+                    _onChangedTaskStatus.value = Event(Unit)
                 } else {
                     // TODO Snackbarでエラーメッセージを表示する
                 }
