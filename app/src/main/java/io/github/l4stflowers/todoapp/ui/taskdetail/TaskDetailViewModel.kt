@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.github.l4stflowers.todoapp.data.Task
+import io.github.l4stflowers.todoapp.data.TaskStatus
 import io.github.l4stflowers.todoapp.repository.TaskRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,9 +48,52 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
     }
 
     fun completeTask() {
+        if (item.value == null)
+            return
+
+        val task = Task(_item.value!!.id, title.value!!, memo.value, TaskStatus.DONE.toTaskServiceStatus())
+
+        uiScope.launch {
+            try {
+                // TODO Viewからユーザ指定できるようにする
+                // TODO "Completing task..."表示を追加する
+                val deferred = repository.saveTaskAsync("baba", task)
+                val resoponse = deferred.await()
+                // TODO 処理中メッセージを非表示にする
+                if (resoponse.isSuccessful) {
+                    // TODO 画面を閉じる
+                } else {
+                    // TODO Snackbarでエラーメッセージを表示する
+                }
+            } catch (e: Throwable) {
+                // TODO Snackbarでエラーメッセージを表示する
+                e.toString()
+            }
+        }
     }
 
     fun deleteTask() {
+        if (item.value == null)
+            return
 
+        val task = Task(_item.value!!.id, title.value!!, memo.value, TaskStatus.DELETED.toTaskServiceStatus())
+
+        uiScope.launch {
+            try {
+                // TODO Viewからユーザ指定できるようにする
+                // TODO "Deleting task..."表示を追加する
+                val deferred = repository.saveTaskAsync("baba", task)
+                val resoponse = deferred.await()
+                // TODO 処理中メッセージを非表示にする
+                if (resoponse.isSuccessful) {
+                    // TODO 画面を閉じる
+                } else {
+                    // TODO Snackbarでエラーメッセージを表示する
+                }
+            } catch (e: Throwable) {
+                // TODO Snackbarでエラーメッセージを表示する
+                e.toString()
+            }
+        }
     }
 }

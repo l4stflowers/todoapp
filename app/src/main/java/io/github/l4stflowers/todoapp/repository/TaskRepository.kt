@@ -15,14 +15,18 @@ class TaskRepository @Inject constructor(
     private val apiKey: String = BuildConfig.ApiKey
 
     fun loadTasksAsync(user: String): Deferred<Response<List<Task>>> {
-        return taskService.getTodos(apiKey, user)
+        return taskService.getTodosAsync(apiKey, user)
     }
 
     fun addTaskAsync(user: String, task:Task): Deferred<Response<Task>> {
-        return taskService.createTodo(apiKey, task, user)
+        return taskService.createTodoAsync(apiKey, task, user)
     }
 
     fun loadTaskAsync(user: String, taskId: String): Deferred<Response<Task>> {
-        return taskService.getTodo(apiKey, user, taskId)
+        return taskService.getTodoAsync(apiKey, user, taskId)
+    }
+
+    fun saveTaskAsync(user: String, task:Task): Deferred<Response<Void>> {
+        return taskService.updateTodoAsync(apiKey, task, user, task.id!!)
     }
 }
