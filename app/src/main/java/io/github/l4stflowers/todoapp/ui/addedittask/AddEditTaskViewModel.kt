@@ -47,7 +47,7 @@ class AddEditTaskViewModel @Inject constructor(val repository: TaskRepository): 
                 // FIXME ViewModelがRepositoryの実装に依存しているのでRepositoryはLiveData<Task>を返すようにする
                 val deferred = repository.addTaskAsync(
                     "baba",
-                    Task("", title.value!!, memo.value, TaskStatus.CREATED.toTaskServiceStatus())
+                    Task("", title.value!!, memo.value)
                 )
                 val resoponse = deferred.await()
                 if (resoponse.isSuccessful) {

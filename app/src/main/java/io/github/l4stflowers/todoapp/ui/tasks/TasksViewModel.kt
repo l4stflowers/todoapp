@@ -59,7 +59,7 @@ class TasksViewModel @Inject constructor(val repository: TaskRepository): ViewMo
                 }
                 _dataLoading.value = false
             } catch (e: Throwable) {
-
+                e.toString()
             }
         }
     }

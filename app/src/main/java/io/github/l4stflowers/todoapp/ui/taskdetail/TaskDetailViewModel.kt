@@ -56,7 +56,7 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
         if (item.value == null)
             return
 
-        val task = Task(_item.value!!.id, title.value!!, memo.value, TaskStatus.DONE.toTaskServiceStatus())
+        val task = item.value!!.copy(state = TaskStatus.Done)
 
         uiScope.launch {
             try {
@@ -81,7 +81,7 @@ class TaskDetailViewModel @Inject constructor(val repository: TaskRepository): V
         if (item.value == null)
             return
 
-        val task = Task(_item.value!!.id, title.value!!, memo.value, TaskStatus.DELETED.toTaskServiceStatus())
+        val task = item.value!!.copy(state = TaskStatus.Deleted)
 
         uiScope.launch {
             try {
