@@ -2,8 +2,12 @@ package io.github.l4stflowers.todoapp.ui.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +32,7 @@ class TasksFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
+        setHasOptionsMenu(true)
         viewDataBinding = TasksFragBinding.inflate(inflater, container, false)
         return viewDataBinding.root
     }
@@ -70,5 +75,21 @@ class TasksFragment : Fragment() {
                 addEditTaskFragment.show(fragmentManager!!, AddEditTaskFragment.TAG)
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.tasks_frag_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        showTaskFilterMenu()
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showTaskFilterMenu() {
+        val popup = PopupMenu(context, activity?.findViewById(R.id.action_filter))
+        popup.menuInflater.inflate(R.menu.task_filter_menu, popup.menu)
+        popup.show()
     }
 }

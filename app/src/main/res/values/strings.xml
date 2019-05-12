@@ -7,6 +7,10 @@
     <string name="input_title_hint">Title*</string>
     <string name="input_memo_hint">Memo</string>
 
+    <string name="action_filter_title">Filter</string>
+    <string name="action_filter_doing_title">Doing</string>
+    <string name="action_filter_done_title">Done</string>
+    <string name="action_filter_deleted_title">Deleted</string>
     <string name="action_save_title">Save</string>
     <string name="action_done_title">Done</string>
     <string name="action_edit_title">Edit</string>
