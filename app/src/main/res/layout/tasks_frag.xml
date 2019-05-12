@@ -19,7 +19,7 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:onRefreshListener="@{() -> viewmodel.loadTasks(true)}"
+        app:onRefreshListener="@{() -> viewmodel.loadTasks()}"
         app:refreshing="@{viewmodel.dataLoading}">
 
         <RelativeLayout
@@ -45,7 +45,7 @@
                     android:paddingEnd="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:text="@{context.getString(viewmodel.currentFilteringLabel)}" />
+                    android:text="@{context.getString(viewmodel.filteringLabel)}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tasks_list"

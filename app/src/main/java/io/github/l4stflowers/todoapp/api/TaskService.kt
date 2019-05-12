@@ -9,13 +9,15 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface TaskService {
     @GET("users/{userId}/todos")
     fun getTodosAsync(
         @Header("x-api-key") apiKey: String,
-        @Path("userId") userId: String
+        @Path("userId") userId: String,
+        @Query("state") state: String
     ): Deferred<Response<List<Task>>>
 
     @POST("users/{userId}/todos")
