@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
 import io.github.l4stflowers.todoapp.R
+import io.github.l4stflowers.todoapp.data.TaskStatus
 import io.github.l4stflowers.todoapp.databinding.TasksFragBinding
 import io.github.l4stflowers.todoapp.ui.addedittask.AddEditTaskFragment
 import javax.inject.Inject
@@ -90,6 +91,16 @@ class TasksFragment : Fragment() {
     private fun showTaskFilterMenu() {
         val popup = PopupMenu(context, activity?.findViewById(R.id.action_filter))
         popup.menuInflater.inflate(R.menu.task_filter_menu, popup.menu)
+        popup.setOnMenuItemClickListener {
+            tasksViewModel.loadTasks(
+                when (it.itemId) {
+                    R.id.action_filter_done -> TaskStatus.Done
+                    R.id.action_filter_deleted -> TaskStatus.Deleted
+                    else -> TaskStatus.Created
+                }
+            )
+            true
+        }
         popup.show()
     }
 }

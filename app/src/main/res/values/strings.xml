@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">todoapp</string>
 
-    <string name="label_all">All</string>
+    <string name="filter_label_doing">Doing</string>
+    <string name="filter_label_done">Done</string>
+    <string name="filter_label_deleted">Deleted</string>
+
+    <string name="no_tasks_label_doing">You have no ToDo!!</string>
+    <string name="no_tasks_label_done">You have not done anything yet.</string>
+    <string name="no_tasks_label_deleted">No deleted tasks.</string>
+
     <string name="no_tasks_all">You have no TO-DOs!</string>
 
     <string name="input_title_hint">Title*</string>
